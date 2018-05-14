@@ -23,17 +23,15 @@ import java.util.TimerTask;
 
 
 public class FxService extends Service {
-
     //定义浮动窗口布局
     private static LinearLayout mFloatLayout;
     private static LayoutParams wmParams;
     //创建浮动窗口设置布局参数的对象
     private static WindowManager mWindowManager;
-
     private static View mFloatView;
     private static final String TAG = "BxService";
     public static HSMDecodeComponent decCom;
-
+    private Timer timer = null;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -54,8 +52,6 @@ public class FxService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
-
-    private Timer timer = null;
 
     private void startTimer() {
         timer = new Timer();
@@ -88,17 +84,11 @@ public class FxService extends Service {
         //设置图片格式，效果为背景透明
         wmParams.format = PixelFormat.RGBA_8888;
         //设置浮动窗口不可聚焦（实现操作除浮动窗口外的其他可见窗口的操作）
-        wmParams.flags =
-//          LayoutParams.FLAG_NOT_TOUCH_MODAL |
-                LayoutParams.FLAG_NOT_FOCUSABLE
-//          LayoutParams.FLAG_NOT_TOUCHABLE
-        ;
+        wmParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | LayoutParams.FLAG_LAYOUT_NO_LIMITS;
 //      wmParams.flags=LayoutParams.FLAG_SHOW_WHEN_LOCKED;
         //调整悬浮窗显示的停靠位置为左侧置顶
         wmParams.gravity = Gravity.LEFT | Gravity.BOTTOM;
-//        wmParams.gravity = 332 | 420;
-//        wmParams.horizontalMargin = 4;
-        //设置悬浮窗口长宽数据
+        //设置悬浮窗口长宽数据及 左、底部 距离
         wmParams.width = width;
         wmParams.height = height;
         wmParams.y = marginBottom;

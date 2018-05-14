@@ -137,7 +137,6 @@ public class FService extends Service implements HuoniScan.DisplayBarcodeDataLis
         cameraManager.reopenCamera();
         camera1 = cameraManager.getCamera();
         parameters1 = camera1.getParameters();
-//        parameters1.setZoom(2);
         parameters1.setExposureCompensation(-1);
         parameters1.setAutoWhiteBalanceLock(true);
         parameters1.setColorEffect(Camera.Parameters.EFFECT_MONO);
@@ -151,14 +150,13 @@ public class FService extends Service implements HuoniScan.DisplayBarcodeDataLis
 
     @Override
     public void displayBarcodeData(String s, long l, HSMDecodeResult[] hsmDecodeResults) {
-        StringBuilder result = new StringBuilder();
+//        StringBuilder result = new StringBuilder();
         String[] codeBytes = new String[hsmDecodeResults.length];
         for (int i = 0; i < hsmDecodeResults.length; i++) {
             codeBytes[i] = hsmDecodeResults[i].getBarcodeData();
 //            String bar = hsmDecodeResults[i].getBarcodeData();
 //            result.append("解码" + i + ":" + bar + "\n");
         }
-
         intent.putExtra("huoniFront", codeBytes);
         //发送广播
         sendBroadcast(intent);
@@ -166,7 +164,6 @@ public class FService extends Service implements HuoniScan.DisplayBarcodeDataLis
 
     @Override
     public void huoniLibraryState(String s) {
-
     }
 
 
