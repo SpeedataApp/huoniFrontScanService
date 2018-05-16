@@ -130,14 +130,14 @@ public class FService extends Service implements HuoniScan.DisplayBarcodeDataLis
         huoniScan.intScanDecode(FService.this);
         hsmDecoder = huoniScan.getHuoniHsmDecoder();
         hsmDecoder.setActiveCamera(ActiveCamera.FRONT_FACING);
-        hsmDecoder.enableSound(true);
+        hsmDecoder.enableSound(false);
         huoniScan.setdisplayBarcodeData(this);
         huoniScan.setHuoniScanLibraryState(this);
         cameraManager = huoniScan.getHuoniCameraManager(this);
         cameraManager.reopenCamera();
         camera1 = cameraManager.getCamera();
         parameters1 = camera1.getParameters();
-        parameters1.setExposureCompensation(-1);
+        parameters1.setExposureCompensation(-3);
         parameters1.setAutoWhiteBalanceLock(true);
         parameters1.setColorEffect(Camera.Parameters.EFFECT_MONO);
         parameters1.setPreviewSize(1920, 1080);
